@@ -8,6 +8,8 @@ public class InstantPlacementController : MonoBehaviour
     public GameObject prefabToPlace; // prefab instantiated when raycast hits surface
     public EnvironmentRaycastManager raycastManager;
 
+    private bool hoopPlaced = false;
+
     private void Update()
     {
         if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
@@ -23,7 +25,7 @@ public class InstantPlacementController : MonoBehaviour
 
     private void TryPlace(Ray ray)
     {
-        if (raycastManager.Raycast(ray, out var hit))
+        if (raycastManager.Raycast(ray, out var hit) && !hoopPlaced)
         {
             var objectToPlace = Instantiate(prefabToPlace);
             objectToPlace.transform.SetPositionAndRotation(
@@ -37,6 +39,7 @@ public class InstantPlacementController : MonoBehaviour
             {
                 objectToPlace.AddComponent<OVRSpatialAnchor>();
             }
+            hoopPlaced = true;
         }
     }
 }
