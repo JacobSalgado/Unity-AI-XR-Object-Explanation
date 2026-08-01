@@ -11,6 +11,10 @@ public class InstantPlacementController : MonoBehaviour
     [SerializeField] private GameObject hoop; // prefab instantiated when raycast hits surface
     [SerializeField] private float maxPlacementDistance = 5f;
 
+    [Header("Wall Clipping Offset")]
+    [SerializeField] private float hoopBackOffset = 0.02f; // half the hoop's backboard thickness, in meters
+    [SerializeField] private float clippingBuffer = 0.005f; // extra buffer to dodge depth-occlusion noise
+
     [Header("Raycast Visual")]
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private GameObject reticlePrefab;
@@ -21,13 +25,16 @@ public class InstantPlacementController : MonoBehaviour
     [Header("Raycast Manager")]
     public EnvironmentRaycastManager raycastManager;
 
-    private bool hoopPlaced = false;
+    [HideInInspector]
+    public bool hoopPlaced = false;
+
     private GameObject reticleInstance;
 
     // cached from the last raycast this frame, consumed by TryPlace on trigger press
     private bool hasValidHit = false;
     private RaycastHit cachedHit;
     private MRUKAnchor cachedAnchor;
+    private EnvironmentRaycastHit cachedEnvHit; // live-depth hit, used for actual placement
 
     // restricts raycasts to wall surfaces only
     private readonly LabelFilter wallFilter = new LabelFilter(MRUKAnchor.SceneLabels.WALL_FACE);
@@ -73,7 +80,18 @@ public class InstantPlacementController : MonoBehaviour
             hasValidHit = room.Raycast(ray, maxPlacementDistance, wallFilter, out cachedHit, out cachedAnchor);
         }
 
-        UpdateRayVisual(ray, hasValidHit, cachedHit);
+        // environment (live depth) raycast gives the actual placement point that matches
+        // what passthrough occlusion sees - only trust it when the room raycast agrees it's a wall
+        bool hasValidEnvHit = false;
+        if (hasValidHit && raycastManager != null)
+        {
+            hasValidEnvHit = raycastManager.Raycast(ray, out cachedEnvHit);
+        }
+
+        // final "can place here" state requires both: it's a wall AND live depth confirms a surface
+        hasValidHit = hasValidHit && hasValidEnvHit;
+
+        UpdateRayVisual(ray, hasValidHit, cachedHit, cachedEnvHit);
 
         if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
         {
@@ -81,7 +99,7 @@ public class InstantPlacementController : MonoBehaviour
         }
     }
 
-    private void UpdateRayVisual(Ray ray, bool didHit, RaycastHit hit)
+    private void UpdateRayVisual(Ray ray, bool didHit, RaycastHit hit, EnvironmentRaycastHit envHit)
     {
         if (didHit)
         {
@@ -93,11 +111,12 @@ public class InstantPlacementController : MonoBehaviour
             lineRenderer.endColor = validColor;
 
             // for the reticle to sit flush on the surface, oriented to its normal
+            // uses envHit (live depth) so preview matches where hoop will land
             if (reticleInstance != null)
             {
                 reticleInstance.SetActive(true);
                 reticleInstance.transform.SetPositionAndRotation(
-                    hit.point,
+                    envHit.point,
                     Quaternion.LookRotation(hit.normal, Vector3.up)
                     );
             }
@@ -132,9 +151,13 @@ public class InstantPlacementController : MonoBehaviour
     {
         if (!hasValidHit || hoopPlaced) return;
 
+        // offset outward along the wall normal so the hoop's backboard sits flush
+        // against the wall instead of clipping into it (pivot offset + depth-occlusion buffer)
+        Vector3 placementPosition = cachedEnvHit.point + cachedEnvHit.normal * (hoopBackOffset + clippingBuffer);
+
         var hoopToPlace = Instantiate(hoop);
         hoopToPlace.transform.SetPositionAndRotation(
-            cachedHit.point,
+            placementPosition,
             Quaternion.LookRotation(cachedHit.normal, Vector3.up)
             );
 
