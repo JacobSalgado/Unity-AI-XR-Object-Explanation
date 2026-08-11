@@ -1,5 +1,6 @@
 using Meta.XR;
 using Meta.XR.MRUtilityKit;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BallShooting : MonoBehaviour
@@ -27,6 +28,10 @@ public class BallShooting : MonoBehaviour
     [SerializeField] private int trajectoryPoints = 30;
     [SerializeField] private float trajectoryTimeStep = 0.05f;
 
+    [Header("Shot Lifecycle")]
+    [SerializeField] private float maxFlightTime = 4f;
+    [SerializeField] private float outOfPlayHeight = -2f; // relative to spawn height, ball below this is "gone"
+
 
     [Header("Instant Placement Controller Reference")]
     public InstantPlacementController instantPlacementController;
@@ -39,6 +44,8 @@ public class BallShooting : MonoBehaviour
     private float currentYaw;
     private float currentPitch;
     private float currentSpeed01; // 0-1, how "charged" the shot is
+
+    private float flightTimer;
 
     private void Awake()
     {
@@ -103,6 +110,13 @@ public class BallShooting : MonoBehaviour
         // stick X curves the shot left/right
         currentYaw = stick.x * maxYawDegrees;
 
+        // lets the stick fall back to neutral WITHOUT firing cancels the aim entirely.
+        if (stick.sqrMagnitude < (chargeDeadzone * chargeDeadzone))
+        {
+            CancelAiming();
+            return;
+        }
+
         // stick Y (forward push) drives both arc height and power together
         currentSpeed01 = Mathf.Clamp01(stick.y); // clamp since pulling stick back gives negative values
         currentPitch = Mathf.Lerp(minPitchDegrees, maxPitchDegrees, currentSpeed01);
@@ -110,16 +124,30 @@ public class BallShooting : MonoBehaviour
         Vector3 launchVelocity = ComputeLaunchVelocity();
         DrawTrajectoryPreview(rightController.position, launchVelocity);
 
-        // letting stick fall back toward neutral fires the shot
-        if (stick.magnitude < releaseThreshold)
+        // trigger press confirms the shot - separate from the stick
+        if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
         {
-            //FireShot(launchVelocity);
+            FireShot(launchVelocity);
         }
     }
 
     private void HandleFlightTimeout()
-    { 
-    
+    {
+        flightTimer += Time.deltaTime;
+
+        bool fellOutOfPlay = basketballInstance.transform.position.y < rightController.position.y + outOfPlayHeight;
+        bool tookTooLong = flightTimer > maxFlightTime;
+
+        if (tookTooLong || fellOutOfPlay)
+        { 
+            // TODO: destroy/respawn the ball and reset to InHand once respawn logic is ready
+        }
+    }
+
+    private void CancelAiming()
+    {
+        state = ShotState.InHand;
+        trajectoryLine.enabled = false;
     }
 
     private Vector3 ComputeLaunchVelocity()
@@ -138,6 +166,21 @@ public class BallShooting : MonoBehaviour
 
         float speed = Mathf.Lerp(minLaunchSpeed, maxLaunchSpeed, currentSpeed01);
         return launchDir * speed;
+    }
+
+    private void FireShot(Vector3 launchVelocity)
+    {
+        // unparent before enabling physics - otherwise the Rigidbody keeps inheriting
+        // the moving controller's transform on top of its own physics motion, which
+        // causes erratic/compounded flight instead of a clean launch
+        basketballInstance.transform.SetParent(null);
+
+        basketballRb.isKinematic = false;
+        basketballRb.linearVelocity = launchVelocity;
+
+        trajectoryLine.enabled = false;
+        flightTimer = 0f;
+        state = ShotState.InFlight;
     }
 
     private void DrawTrajectoryPreview(Vector3 origin, Vector3 initialVelocity)
