@@ -4,15 +4,41 @@ using UnityEngine;
 
 public class BallShooting : MonoBehaviour
 {
+    private enum ShotState { InHand, Aiming, InFlight }
+    private ShotState state = ShotState.InHand;
+
     [Header("Controller & Shooting Features")]
     [SerializeField] private Transform rightController; // origin of the spawned basketball
     [SerializeField] private GameObject basketballPrefab; // prefab of basketball
 
+    private Transform hoopTarget; // rim 
+
+    [Header("Aiming")]
+    [SerializeField] private float maxYawDegrees = 35f; // stick X -> left/right curve
+    [SerializeField] private float minPitchDegrees = 25f; // stick at rest -> lowest arc
+    [SerializeField] private float maxPitchDegrees = 75f; // stick Y at full push -> highest arc
+    [SerializeField] private float minLaunchSpeed = 3f;
+    [SerializeField] private float maxLaunchSpeed = 9f;
+    [SerializeField] private float chargeDeadzone = 0.15f; // stick must exceed this to start charging
+    [SerializeField] private float releaseThreshold = 0.1f; // letting stick fall below this fires the shot
+
+    [Header("Trajectory Preview")]
+    [SerializeField] private LineRenderer trajectoryLine;
+    [SerializeField] private int trajectoryPoints = 30;
+    [SerializeField] private float trajectoryTimeStep = 0.05f;
+
+
+    [Header("Instant Placement Controller Reference")]
     public InstantPlacementController instantPlacementController;
 
     private bool activeBall = false;
     private GameObject basketballInstance;
     private Rigidbody basketballRb;
+
+    // Aim States
+    private float currentYaw;
+    private float currentPitch;
+    private float currentSpeed01; // 0-1, how "charged" the shot is
 
     private void Awake()
     {
@@ -22,6 +48,12 @@ public class BallShooting : MonoBehaviour
         basketballRb = basketballInstance.GetComponent<Rigidbody>();
         basketballRb.isKinematic = true; // no gravity yet - controlled manually while in-hand
         basketballInstance.SetActive(false);
+
+        if (trajectoryLine != null)
+        {
+            trajectoryLine.positionCount = trajectoryPoints;
+            trajectoryLine.enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -29,8 +61,93 @@ public class BallShooting : MonoBehaviour
     {
         if (instantPlacementController.hoopPlaced && !activeBall)
         {
+            hoopTarget = instantPlacementController.PlacedHoopTransform;
             basketballInstance.SetActive(true);
             activeBall = true;
+        }
+
+        switch (state)
+        {
+            case ShotState.InHand:
+                CheckForChargeStart(); //stick exceeds deadzone -> move to Aiming
+                break;
+            case ShotState.Aiming:
+                HandleAiming(); // read stick, update yaw/pitch/speed, draw trajectory, check release
+                break;
+            case ShotState.InFlight:
+                HandleFlightTimeout();  // watch for miss (fell out of play / timed out)
+                break;
+        }
+    }
+
+    /**
+     * @brief checks if right stick is enough to charge basketball aim
+     */
+    private void CheckForChargeStart()
+    {
+        Vector2 stick = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+        if (stick.sqrMagnitude > (chargeDeadzone * chargeDeadzone))
+        {
+            state = ShotState.Aiming;
+            trajectoryLine.enabled = true;
+        }
+    }
+
+    private void HandleAiming()
+    {
+        // keeps the ball anchored to hand while aiming
+        basketballInstance.transform.SetPositionAndRotation(rightController.position, rightController.rotation);
+
+        Vector2 stick = OVRInput.Get(OVRInput.Axis2D.SecondaryThumbstick);
+
+        // stick X curves the shot left/right
+        currentYaw = stick.x * maxYawDegrees;
+
+        // stick Y (forward push) drives both arc height and power together
+        currentSpeed01 = Mathf.Clamp01(stick.y); // clamp since pulling stick back gives negative values
+        currentPitch = Mathf.Lerp(minPitchDegrees, maxPitchDegrees, currentSpeed01);
+
+        Vector3 launchVelocity = ComputeLaunchVelocity();
+        DrawTrajectoryPreview(rightController.position, launchVelocity);
+
+        // letting stick fall back toward neutral fires the shot
+        if (stick.magnitude < releaseThreshold)
+        {
+            //FireShot(launchVelocity);
+        }
+    }
+
+    private void HandleFlightTimeout()
+    { 
+    
+    }
+
+    private Vector3 ComputeLaunchVelocity()
+    {
+        Vector3 toHoop = hoopTarget.position - rightController.position;
+        Vector3 horizontalDir = new Vector3(toHoop.x, 0f, toHoop.z).normalized;
+
+        Vector3 aimedHorizontal = Quaternion.AngleAxis(currentYaw, Vector3.up) * horizontalDir;
+
+        float pitchRad = currentPitch * Mathf.Deg2Rad;
+        Vector3 launchDir = new Vector3(
+            aimedHorizontal.x * Mathf.Cos(pitchRad),
+            Mathf.Sin(pitchRad),
+            aimedHorizontal.z * Mathf.Cos(pitchRad)
+        ).normalized;
+
+        float speed = Mathf.Lerp(minLaunchSpeed, maxLaunchSpeed, currentSpeed01);
+        return launchDir * speed;
+    }
+
+    private void DrawTrajectoryPreview(Vector3 origin, Vector3 initialVelocity)
+    {
+        Vector3 gravity = Physics.gravity;
+        for (int i = 0; i < trajectoryPoints; i++)
+        {
+            float t = i * trajectoryTimeStep;
+            Vector3 point = origin + initialVelocity * t + 0.5f * gravity * t * t;
+            trajectoryLine.SetPosition(i, point);
         }
     }
 }

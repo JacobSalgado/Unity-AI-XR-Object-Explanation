@@ -28,6 +28,10 @@ public class InstantPlacementController : MonoBehaviour
     [HideInInspector]
     public bool hoopPlaced = false;
 
+    // Reference to actual instantiated hoop in the scene, once placed 
+    // other scripts (e.g. BallShooting) should read THIS, not the prefab asset
+    public Transform PlacedHoopTransform { get; private set; }
+
     private GameObject reticleInstance;
 
     // cached from the last raycast this frame, consumed by TryPlace on trigger press
@@ -160,6 +164,7 @@ public class InstantPlacementController : MonoBehaviour
             placementPosition,
             Quaternion.LookRotation(cachedHit.normal, Vector3.up)
             );
+        PlacedHoopTransform = hoopToPlace.transform;
 
         // if no MRUK component is present in the secene, an OVRSpatialAnchor component
         // to the instantiated prefab to anchor it in the physical space and prevent drift
