@@ -139,8 +139,8 @@ public class BallShooting : MonoBehaviour
         bool tookTooLong = flightTimer > maxFlightTime;
 
         if (tookTooLong || fellOutOfPlay)
-        { 
-            // TODO: destroy/respawn the ball and reset to InHand once respawn logic is ready
+        {
+            RespawnBall();
         }
     }
 
@@ -192,5 +192,16 @@ public class BallShooting : MonoBehaviour
             Vector3 point = origin + initialVelocity * t + 0.5f * gravity * t * t;
             trajectoryLine.SetPosition(i, point);
         }
+    }
+
+    private void RespawnBall()
+    {
+        Destroy(basketballInstance);
+
+        basketballInstance = Instantiate(basketballPrefab, rightController.position, rightController.rotation, rightController);
+        basketballRb = basketballInstance.GetComponent<Rigidbody>();
+        basketballRb.isKinematic = true; // back to hand-controlled, no gravity until next shot
+
+        state = ShotState.InHand;
     }
 }
