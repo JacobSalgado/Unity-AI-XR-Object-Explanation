@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 1981976066909491183}
   - component: {fileID: 4256067550603316203}
   - component: {fileID: 1577269636138983889}
+  - component: {fileID: 3100129569045884503}
+  - component: {fileID: 8505697712089173489}
   m_Layer: 0
   m_Name: Basketball
-  m_TagString: Untagged
+  m_TagString: Basketball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118,3 +120,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3100129569045884503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332839571302480060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe0e14f016b6f845b27f6385ce986a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BallContactTracker
+  boardTag: HoopBoard
+--- !u!64 &8505697712089173489
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2332839571302480060}
+  m_Material: {fileID: 13400000, guid: 6d33e0e680e26d14597521b958a06b1e, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2122681682525997855, guid: 6b7e99fb01590ee4881429e0ce040190, type: 3}

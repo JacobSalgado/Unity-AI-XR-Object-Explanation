@@ -31,8 +31,119 @@ Transform:
   m_Children:
   - {fileID: 1053963271959698800}
   - {fileID: 8189149228152074424}
+  - {fileID: 423561916457534525}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &562422257680844023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2365001566649462420}
+  - component: {fileID: 8600256841744650920}
+  m_Layer: 0
+  m_Name: rimColliders_3
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2365001566649462420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562422257680844023}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7066079, y: -0.15397811, z: -0.035466403, w: 0.6897378}
+  m_LocalPosition: {x: -0.03536, y: 0.06292, z: -0.07721}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: -99.711, y: 74.172, z: -89.625}
+--- !u!136 &8600256841744650920
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562422257680844023}
+  m_Material: {fileID: 13400000, guid: d0ea73be3b97f234bbf8baaf11b8fb48, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0037158122
+  m_Height: 0.025378639
+  m_Direction: 1
+  m_Center: {x: -0.000000101314164, y: -0.0715641, z: -0.10958439}
+--- !u!1 &929191397372603748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3601300806891146090}
+  - component: {fileID: 8783952563392354564}
+  m_Layer: 0
+  m_Name: rimColliders_6
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3601300806891146090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929191397372603748}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.6967351, y: 0.215784, z: 0.15451865, w: 0.66642445}
+  m_LocalPosition: {x: -0.0632, y: 0.0619, z: -0.0504}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: -95.541, y: -48.479004, z: 78.874}
+--- !u!136 &8783952563392354564
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929191397372603748}
+  m_Material: {fileID: 13400000, guid: d0ea73be3b97f234bbf8baaf11b8fb48, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0037158127
+  m_Height: 0.033996522
+  m_Direction: 1
+  m_Center: {x: 0.000000041099018, y: -0.075872846, z: -0.10958429}
 --- !u!1 &1284836594527927844
 GameObject:
   m_ObjectHideFlags: 0
@@ -123,6 +234,169 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2117253805571853450
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1636676603531030588}
+  - component: {fileID: 2279779740678453498}
+  m_Layer: 0
+  m_Name: rimColliders_2
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1636676603531030588
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117253805571853450}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.63856363, y: -0.31602284, z: -0.31142992, w: 0.62879056}
+  m_LocalPosition: {x: 0.0366, y: 0.0635, z: -0.0739}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: -90.875, y: -1.1679993, z: -51.511}
+--- !u!136 &2279779740678453498
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117253805571853450}
+  m_Material: {fileID: 13400000, guid: d0ea73be3b97f234bbf8baaf11b8fb48, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0037158132
+  m_Height: 0.03278263
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.07526598, z: -0.10958415}
+--- !u!1 &2812927315164012140
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3906546851742975608}
+  - component: {fileID: 2296498234268453395}
+  m_Layer: 0
+  m_Name: rimColliders_4
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3906546851742975608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812927315164012140}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.004878722, y: 0.6976861, z: 0.7035096, w: -0.13522066}
+  m_LocalPosition: {x: 0.03146, y: 0.06305, z: 0.06976}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: -100.587, y: 98.268, z: 93.152}
+--- !u!136 &2296498234268453395
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2812927315164012140}
+  m_Material: {fileID: 13400000, guid: d0ea73be3b97f234bbf8baaf11b8fb48, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0037158122
+  m_Height: 0.025378639
+  m_Direction: 1
+  m_Center: {x: -0.000000101314164, y: -0.0715641, z: -0.10958439}
+--- !u!1 &3079133911790565996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3111147466258222885}
+  - component: {fileID: 3495096155899981846}
+  m_Layer: 0
+  m_Name: backboardCollider
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3111147466258222885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3079133911790565996}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3495096155899981846
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3079133911790565996}
+  m_Material: {fileID: 13400000, guid: ccf0bfc31cb22b14f8b3a8aa6de2b0e8, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.15507728, y: 0.10355037, z: 0.003220223}
+  m_Center: {x: -0.0000036358833, y: -0.00008774921, z: -0.043513414}
 --- !u!1 &3925952847549266469
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,7 +410,7 @@ GameObject:
   - component: {fileID: 3607692818204085871}
   m_Layer: 0
   m_Name: board
-  m_TagString: Untagged
+  m_TagString: HoopBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +427,17 @@ Transform:
   m_LocalPosition: {x: 0.0000000047683715, y: 0.11734847, z: 0.0044138883}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3111147466258222885}
+  - {fileID: 5761926095366855030}
+  - {fileID: 4464181258059517590}
+  - {fileID: 1636676603531030588}
+  - {fileID: 2365001566649462420}
+  - {fileID: 3906546851742975608}
+  - {fileID: 8596211374087250339}
+  - {fileID: 3601300806891146090}
+  - {fileID: 6573765862487991872}
+  - {fileID: 8361649949641022914}
   m_Father: {fileID: 5307100839088198690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &1670336864358019093
@@ -213,3 +497,329 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &5364539069587685462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5761926095366855030}
+  - component: {fileID: 2852592676862176633}
+  m_Layer: 0
+  m_Name: backRimCollider
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5761926095366855030
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5364539069587685462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2852592676862176633
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5364539069587685462}
+  m_Material: {fileID: 13400000, guid: d0ea73be3b97f234bbf8baaf11b8fb48, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.020688783, y: 0.01083599, z: 0.012227386}
+  m_Center: {x: -0.00084929727, y: -0.046862423, z: -0.03900983}
+--- !u!1 &6337940536511822798
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4464181258059517590}
+  - component: {fileID: 4771251041158431469}
+  m_Layer: 0
+  m_Name: rimColliders_1
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4464181258059517590
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337940536511822798}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.6447783, y: 0.30314243, z: 0.29835096, w: 0.63510025}
+  m_LocalPosition: {x: -0.034989763, y: 0.06350287, z: -0.07618782}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: -90.875, y: -1.1679993, z: 51.511}
+--- !u!136 &4771251041158431469
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6337940536511822798}
+  m_Material: {fileID: 13400000, guid: d0ea73be3b97f234bbf8baaf11b8fb48, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0037158132
+  m_Height: 0.03278263
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.07526598, z: -0.10958415}
+--- !u!1 &7145713395324022061
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8361649949641022914}
+  - component: {fileID: 9113924239989654440}
+  m_Layer: 0
+  m_Name: rimColliders_8
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8361649949641022914
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7145713395324022061}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.57426304, y: 0.43247324, z: 0.40281987, w: 0.5665025}
+  m_LocalPosition: {x: -0.07922, y: 0.06562, z: 0.01479}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: -92.484, y: -39.12201, z: 111.546}
+--- !u!136 &9113924239989654440
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7145713395324022061}
+  m_Material: {fileID: 13400000, guid: d0ea73be3b97f234bbf8baaf11b8fb48, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0037158127
+  m_Height: 0.025527105
+  m_Direction: 1
+  m_Center: {x: -0.000000023549767, y: -0.07368716, z: -0.1095854}
+--- !u!1 &7708181260098172580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6573765862487991872}
+  - component: {fileID: 6001652708719568844}
+  m_Layer: 0
+  m_Name: rimColliders_7
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6573765862487991872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7708181260098172580}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.42088604, y: 0.5828088, z: 0.55218625, w: 0.42223135}
+  m_LocalPosition: {x: -0.05595, y: 0.06704, z: 0.05802}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: -92.484, y: -39.12201, z: 145.909}
+--- !u!136 &6001652708719568844
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7708181260098172580}
+  m_Material: {fileID: 13400000, guid: d0ea73be3b97f234bbf8baaf11b8fb48, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0037158122
+  m_Height: 0.025558023
+  m_Direction: 1
+  m_Center: {x: 0.000000095409824, y: -0.07367194, z: -0.10958491}
+--- !u!1 &8076883023822094250
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 423561916457534525}
+  - component: {fileID: 7301766150095350288}
+  m_Layer: 0
+  m_Name: ScoreZone
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &423561916457534525
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076883023822094250}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.0171, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5307100839088198690}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &7301766150095350288
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8076883023822094250}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.05856738, y: 0.03740537, z: 0.04664206}
+  m_Center: {x: 0.0020987298, y: 0.053413153, z: 0.007629877}
+--- !u!1 &8597995983599261779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8596211374087250339}
+  - component: {fileID: 5777604690885971788}
+  m_Layer: 0
+  m_Name: rimColliders_5
+  m_TagString: HoopBoard
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8596211374087250339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8597995983599261779}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.6083834, y: -0.07421398, z: -0.35536453, w: 0.7057464}
+  m_LocalPosition: {x: 0.11152, y: 0.05532, z: -0.00867}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1053963271959698800}
+  m_LocalEulerAnglesHint: {x: -114.29, y: -127.203, z: 90.999}
+--- !u!136 &5777604690885971788
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8597995983599261779}
+  m_Material: {fileID: 13400000, guid: d0ea73be3b97f234bbf8baaf11b8fb48, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.0037158132
+  m_Height: 0.03278263
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.07526598, z: -0.10958415}

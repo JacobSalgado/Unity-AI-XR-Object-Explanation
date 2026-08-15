@@ -25,6 +25,9 @@ public class InstantPlacementController : MonoBehaviour
     [Header("Raycast Manager")]
     public EnvironmentRaycastManager raycastManager;
 
+    [Header("Score Manager")]
+    public ScoreManager scoreManager_;
+
     [HideInInspector]
     public bool hoopPlaced = false;
 
@@ -174,5 +177,8 @@ public class InstantPlacementController : MonoBehaviour
         }
         hoopPlaced = true;
         HideVisual();
+
+        // Start the game
+        scoreManager_.StartGame();
     }
 }

@@ -16,12 +16,12 @@ public class BallShooting : MonoBehaviour
 
     [Header("Aiming")]
     [SerializeField] private float maxYawDegrees = 35f; // stick X -> left/right curve
-    [SerializeField] private float minPitchDegrees = 25f; // stick at rest -> lowest arc
-    [SerializeField] private float maxPitchDegrees = 75f; // stick Y at full push -> highest arc
+    [SerializeField] private float minPitchDegrees = 0f; // stick at rest -> lowest arc
+    [SerializeField] private float maxPitchDegrees = 50f; // stick Y at full push -> highest arc
     [SerializeField] private float minLaunchSpeed = 3f;
     [SerializeField] private float maxLaunchSpeed = 9f;
     [SerializeField] private float chargeDeadzone = 0.15f; // stick must exceed this to start charging
-    [SerializeField] private float releaseThreshold = 0.1f; // letting stick fall below this fires the shot
+    // [SerializeField] private float releaseThreshold = 0.1f; // letting stick fall below this fires the shot
 
     [Header("Trajectory Preview")]
     [SerializeField] private LineRenderer trajectoryLine;
@@ -32,6 +32,12 @@ public class BallShooting : MonoBehaviour
     [SerializeField] private float maxFlightTime = 4f;
     [SerializeField] private float outOfPlayHeight = -2f; // relative to spawn height, ball below this is "gone"
 
+    [Header("Physics Feel")]
+    [SerializeField] private float ballMass = 0.6f; // kg, roughly equivalent to a real bball
+    [SerializeField] private float ballDrag = 0.05f;
+    [SerializeField] private float ballAngularDrag = 0.3f;
+    [SerializeField] private float backspinAmount = 8f; // radians/sec applied at release
+
 
     [Header("Instant Placement Controller Reference")]
     public InstantPlacementController instantPlacementController;
@@ -39,6 +45,7 @@ public class BallShooting : MonoBehaviour
     private bool activeBall = false;
     private GameObject basketballInstance;
     private Rigidbody basketballRb;
+    private BallContactTracker basketballContactTracker_;
 
     // Aim States
     private float currentYaw;
@@ -54,7 +61,12 @@ public class BallShooting : MonoBehaviour
 
         basketballRb = basketballInstance.GetComponent<Rigidbody>();
         basketballRb.isKinematic = true; // no gravity yet - controlled manually while in-hand
+
+        ConfigureBallPhysics(basketballRb);
         basketballInstance.SetActive(false);
+
+        basketballContactTracker_ = basketballInstance.GetComponent<BallContactTracker>();
+
 
         if (trajectoryLine != null)
         {
@@ -85,6 +97,18 @@ public class BallShooting : MonoBehaviour
                 HandleFlightTimeout();  // watch for miss (fell out of play / timed out)
                 break;
         }
+    }
+
+    /**
+     * @brief sets mass/drag for basketball
+     */
+    private void ConfigureBallPhysics(Rigidbody rb)
+    {
+        rb.mass = ballMass;
+        rb.linearDamping = ballDrag;
+        rb.angularDamping = ballAngularDrag;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        rb.interpolation = RigidbodyInterpolation.Interpolate; // smoothens visual motion between physics steps
     }
 
     /**
@@ -168,6 +192,17 @@ public class BallShooting : MonoBehaviour
         return launchDir * speed;
     }
 
+    private void DrawTrajectoryPreview(Vector3 origin, Vector3 initialVelocity)
+    {
+        Vector3 gravity = Physics.gravity;
+        for (int i = 0; i < trajectoryPoints; i++)
+        {
+            float t = i * trajectoryTimeStep;
+            Vector3 point = origin + initialVelocity * t + 0.5f * gravity * t * t;
+            trajectoryLine.SetPosition(i, point);
+        }
+    }
+
     private void FireShot(Vector3 launchVelocity)
     {
         // unparent before enabling physics - otherwise the Rigidbody keeps inheriting
@@ -183,17 +218,6 @@ public class BallShooting : MonoBehaviour
         state = ShotState.InFlight;
     }
 
-    private void DrawTrajectoryPreview(Vector3 origin, Vector3 initialVelocity)
-    {
-        Vector3 gravity = Physics.gravity;
-        for (int i = 0; i < trajectoryPoints; i++)
-        {
-            float t = i * trajectoryTimeStep;
-            Vector3 point = origin + initialVelocity * t + 0.5f * gravity * t * t;
-            trajectoryLine.SetPosition(i, point);
-        }
-    }
-
     private void RespawnBall()
     {
         Destroy(basketballInstance);
@@ -203,5 +227,11 @@ public class BallShooting : MonoBehaviour
         basketballRb.isKinematic = true; // back to hand-controlled, no gravity until next shot
 
         state = ShotState.InHand;
+    }
+
+    public void OnBallResult(bool madeShot)
+    {
+        if (state != ShotState.InFlight) return;
+        RespawnBall();
     }
 }
